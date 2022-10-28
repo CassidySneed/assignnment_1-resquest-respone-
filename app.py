@@ -39,13 +39,58 @@ def madlibs(adjective, noun):
 def multiply_number(number1, number2): 
     if number1.isdigit() and number2.isdigit():
         total = int(number1) * int(number2)
-        return str(total)
+        return f'{number1} times {number2} is {str(total)}'
     else: 
         return f'Invalid inputs. Please try again by entering 2 numbers!'
 
 
+# Write a route, sayntimes, that will repeat a string a given number of times. It should use the URL /sayntimes/<word>/<n>. For example:
+
+# If I go to the URL /sayntimes/hello/6, I should see the result: hello hello hello hello hello hello
+# If I go to the URL /sayntimes/world/3, I should see the result: world world world
+# If I go to the URL /sayntimes/hello/world, I should see the result: Invalid input. Please try again by entering a word and a number!
+# HINT: Use a for loop to add up lots of small strings into one large string!
+
+# Try out your route in the browser! What happens when you use a very large number (e.g. 1000000)?
+
+# Say n times 
+# come back to this (look at type method )
+@app.route('/sayntimes/<word>/<n>')
+def sayntimes(word, n): 
+    word_list = " "
+    # n = int(n)
+
+    # if n == (type(int)) and word_list == (type(str)): 
+    #     for i in range(n):
+    #         word_list += (" " + word)
+    #         return word_list 
+    # else: 
+    #     return f'Please try entering a word and a number!'
+
+    if n.isnumeric():
+        n = int(n)
+        for i in range(n):
+            word_list += (" " + word)
+        return word_list 
+    else: 
+        return f'Please try entering a word and a number!'
 
 
+
+
+# dice game
+@app.route('/dicegame')
+def dice_game(): 
+    import random
+    n = random.randint(0,6)
+    
+
+    if n == 6: 
+       return f'You win'
+    else:
+       return  f'You lose'
+    # return str(n)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
